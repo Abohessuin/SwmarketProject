@@ -1,0 +1,20 @@
+package SystemBehavioralPatterns;
+
+import Controllers.storeownerActions;
+
+public class UndoAddCommand implements command {
+
+	private storeownerActions sta;
+
+	public UndoAddCommand(storeownerActions sta) {
+
+		this.sta = sta;
+	}
+
+	public void execute() {
+		sta.undoAdd();
+
+	}
+     
+      
+}

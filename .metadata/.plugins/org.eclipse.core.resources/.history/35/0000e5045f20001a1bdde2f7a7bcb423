@@ -1,0 +1,37 @@
+package Controllers;
+import java.util.Map;
+import Database.*;
+import Datatypes.*;
+import Controllers.*;
+import SystemBehavioralPatterns.*;
+import Encapsulatedbehaviors.*;
+public class storecontroller {
+	
+  public void searchstore(storeDatabase sdb,product pr,String storename) {
+		
+	  sdb.searchaboutstores(pr, storename);
+		
+	}
+    
+	public void addstoretostoredb(storeDatabase sdb,store s) {
+		sdb.addToDatabase(s);
+}
+	
+	 public Map<product,store>	searchforproductbycont(String productsearch,storeDatabase db){
+		  return db.searchForProductDb(productsearch);
+	  }
+	 
+	 
+	 public void checkForBeingStoreowner(user u, store s) {
+		 String 
+	 }
+	 
+	 
+	 
+	 public void checkForBeingCallaberatore(user u,store s) {
+		 
+		 
+	 }
+    
+	
+}

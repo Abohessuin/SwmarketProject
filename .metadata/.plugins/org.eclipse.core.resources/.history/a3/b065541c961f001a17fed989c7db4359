@@ -1,0 +1,224 @@
+package Database;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import Database.*;
+import Datatypes.*;
+import SystemBehavioralPatterns.databaseIterator;
+import Controllers.*;
+import DatabaseIterator.*;
+
+public class userDBUsingFiles implements userDatabase {
+	
+	
+	private int count=0;
+	private String filePath="C:\\Users\\lenovo\\Desktop\\ecom2\\fileDatabase\\user.txt";
+	private String tmp="C:\\Users\\lenovo\\Desktop\\ecom2\\fileDatabase\\tmp.txt";
+	private databaseIterator baseIter;
+	
+
+	
+    public user getuser(user us) {
+		user ad1=new user();
+		String userUsername = us.getUse_name();
+		String userPassword = us.getPassword();
+		baseIter=new databaseIterator(filePath, count);
+			while(baseIter.hasNext()) {
+			       ad1=(user)baseIter.next();
+			       String currUsername = ad1.getUse_name();
+					String currPassword = ad1.getPassword();
+
+					if(currUsername.equals(userUsername) && currPassword.equals(userPassword)) {
+						return  ad1;
+					}
+			}
+			
+			return null;
+		
+	}
+  
+	
+	public boolean checkExistence(Object ob) {
+		user us=(user)ob;
+		user ad1=new user();
+		String userUsername = us.getUse_name();
+		String userPassword = us.getPassword();
+		baseIter=new databaseIterator(filePath, count);
+			while(baseIter.hasNext()){
+			       ad1=(user)baseIter.next();
+			       String currUsername = ad1.getUse_name();
+					String currPassword = ad1.getPassword();
+				
+					if(currUsername.equals(userUsername) && currPassword.equals(userPassword)) {
+						return true;
+					}
+			}
+			
+			return true;
+			}
+
+	
+	public void printfortest() {
+		user ad1=new user();
+		String nam;
+		String passwor;
+		String typ;
+		FileInputStream fis;
+		try {
+			      fis = new FileInputStream("user.txt");
+			      ObjectInputStream ois = new ObjectInputStream(fis);
+			      int count=1;
+				  while(true) {
+					 ad1=(user)ois.readObject();
+					 nam=ad1.getUse_name();
+					 passwor=ad1.getPassword();
+				     System.out.println( count+"one.........................");
+				     System.out.println(nam);
+				     System.out.println(passwor);
+				     count++;
+				    }
+						
+					} catch (ClassNotFoundException | IOException e) {
+	
+				
+		
+	}
+		
+	}
+
+	public void addToDatabase(Object ob) {
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(filePath,true);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(ob);
+			oos.close();
+			
+		} catch (FileNotFoundException e) {
+		
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		
+	}
+  
+	
+
+  
+	
+	public void ObjectToFile(Object serObj, String loc) {
+		FileOutputStream fos ;
+        try {
+ 
+        	 fos = new FileOutputStream(loc,true);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fos);
+            objectOut.writeObject(serObj);
+            objectOut.close();
+    
+        
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		
+	}
+	
+	
+
+	public void clear(String loc) {
+		 PrintWriter writer;
+			try {
+				writer = new PrintWriter(loc);
+				writer.print("");
+		    	writer.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
+
+
+	
+	public int getIndexOfObjectInFile(Object ob) {
+		    int i=0;
+	    	count=baseIter.setcounter(filePath);
+		    user a=new user();
+		    baseIter=new databaseIterator(filePath, count);
+			  while(baseIter.hasNext()) {
+			    a=(user) baseIter.next();
+			    i++;
+			  
+	    }
+		return i;
+	}
+
+    
+	
+	public void removeFromDatabase(int index) {
+		 int j=0;
+		   user ss=new user();
+		   count=baseIter.setcounter(filePath);
+		   baseIter=new databaseIterator(filePath,count);
+		   while(baseIter.hasNext()) {
+			   ss=(user)baseIter.next();
+			   if(j!=index) {
+				   this.ObjectToFile(ss, tmp);
+			   }
+			   j++;
+		   }
+		   count=baseIter.setcounter(filePath);
+		   this.clear(filePath);
+		   baseIter=new databaseIterator(tmp, count);
+		   while(baseIter.hasNext()) {
+			   ss=(user)baseIter.next();
+			   ObjectToFile(ss, filePath);
+		   }
+		   
+			this.clear(tmp);
+		
+	}
+
+
+	public void ModifyObjectInDatabase(int index,Object p) {
+		int j=0;
+           user ss=new user();
+		   count=baseIter.setcounter(filePath);
+		   baseIter=new databaseIterator(filePath,count);
+		   while(baseIter.hasNext()) {
+			   ss=(user)baseIter.next();
+			   if(j==index) {
+				   this.ObjectToFile((user)p, tmp);
+			   }else {
+				   this.ObjectToFile(ss, tmp);
+			   }
+			   j++;
+		   }
+		   count=baseIter.setcounter(filePath);
+		   this.clear(filePath);
+		   baseIter=new databaseIterator(tmp, count);
+		   while(baseIter.hasNext()) {
+			   ss=(user)baseIter.next();
+			   ObjectToFile(ss, filePath);
+		   }
+		   
+			this.clear(tmp);
+		
+	}
+
+	
+
+	
+
+	  
+	
+}
