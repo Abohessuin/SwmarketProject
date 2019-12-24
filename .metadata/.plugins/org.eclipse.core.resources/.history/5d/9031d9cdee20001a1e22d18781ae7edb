@@ -1,0 +1,17 @@
+package SystemBehavioralPatterns;
+
+import Datatypes.storeownerActions;
+
+public class UndoDeleteCommand implements command {
+	private storeownerActions sta;
+
+	public UndoDeleteCommand(storeownerActions sta) {
+
+		this.sta = sta;
+	}
+
+	public void execute() {
+		sta.undoAdd();
+
+	}
+}

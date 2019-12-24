@@ -1,0 +1,65 @@
+package Controllers;
+import java.util.ArrayList;
+import java.util.Map;
+import Database.*;
+import Datatypes.*;
+import Controllers.*;
+import SystemBehavioralPatterns.*;
+import Database.*;
+import Datatypes.*;
+import Controllers.*;
+import Encapsulatedbehaviors.*;
+
+public class usercontroller {
+	
+	public boolean login(userDatabase db,user u) {
+		boolean found = db.checkExistence(u);
+		if(found==true) {
+			String m=u.getUse_name();
+			System.out.println("welcome back"+" "+m);
+			return true;
+		}
+		else {
+			System.out.println("password or username is invalid");
+			return false;
+		}
+	}
+	
+	public boolean register(userDatabase db,user u) {
+		Boolean x=db.checkExistence(u);
+		if(x==true) {
+			System.out.println("user is already register");
+			return false;
+			
+		}
+		else {
+			db.addToDatabase(u);
+			System.out.println("Registration completed");
+			return true;
+		}
+		
+	}
+	
+     public user getuser(userDatabase db,user u) {
+    	 return db.getuser(u);
+     }
+     
+     public void modifyUser(user c,userDatabase db) {
+    	 int ind=db.getIndexOfObjectInFile(c);
+    	 db.ModifyObjectInDatabase(ind, c);
+     }
+	
+     public store checkUserAccessToHisStores(String storename,user u) {
+    	    ArrayList<store>s=u.getStoresUserowened();
+    	    for(store currs:s) {
+    	    	if(currs.getStoreName().equals(storename)==true) {
+    	    		return currs;
+    	    }
+    	    }
+    	    return null;
+    	    
+    	 
+     }
+	
+
+}
