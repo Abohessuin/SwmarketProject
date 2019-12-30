@@ -32,6 +32,7 @@ public class itemSoldDbUsingFiles implements itemsSoldDatabase {
 
 	public ArrayList<Purchase> getPurchases() {
 		Purchase ss = new Purchase();
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		ArrayList<Purchase> purchase = new ArrayList<Purchase>();
@@ -72,10 +73,9 @@ public class itemSoldDbUsingFiles implements itemsSoldDatabase {
 
 			e.printStackTrace();
 		} catch (IOException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void ObjectToFile(Object serObj, String loc) {
@@ -122,6 +122,7 @@ public class itemSoldDbUsingFiles implements itemsSoldDatabase {
 	public void removeFromDatabase(int index) {
 		int j = 0;
 		Purchase ss = new Purchase();
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
@@ -146,6 +147,7 @@ public class itemSoldDbUsingFiles implements itemsSoldDatabase {
 	public void ModifyObjectInDatabase(int index, Object p) {
 		int j = 0;
 		Purchase ss = new Purchase();
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
@@ -157,6 +159,7 @@ public class itemSoldDbUsingFiles implements itemsSoldDatabase {
 			}
 			j++;
 		}
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		this.clear(filePath);
 		baseIter = new databaseIterator(tmp, count);
@@ -172,7 +175,8 @@ public class itemSoldDbUsingFiles implements itemsSoldDatabase {
 	public boolean checkAboutUserPurchase(user u) {
 		Purchase ad1 = new Purchase();
 		String nam = u.getUse_name(), n;
-		int count = baseIter.setcounter(filePath);
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		user f;
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {

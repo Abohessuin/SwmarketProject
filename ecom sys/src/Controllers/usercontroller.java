@@ -73,27 +73,24 @@ public class usercontroller {
      }
      
  	
-     public store checkcollaboratorAccessToHisStores(String storename,user u) {
-    	    ArrayList<store>s=u.getStoresUserowened();
-    	    String n=u.getUse_name();
-    	    for(store currs:s) {
-    	    	if(currs.getStoreName().equals(storename)) {
-    	    		ArrayList<user>us=new ArrayList<user>();
-    	    		for(user curr:us) {
-    	    			if(n.equals(curr.getUse_name())) {
-    	    				return currs;
-    	    			}
-    	    		}
-    	    }
+     public store checkcollaboratorAccessToHisStores(String storename,user u,storecontroller scont,storeDatabase sdb) {
+    	    store ss=scont.getStorecont(storename, sdb);
+    	    ArrayList<user>User=ss.getCollaborators();
+    	    String username=u.getUse_name();
+    	    for(user curr:User) {
+    	    	if(curr.getUse_name().equals(username)) {
+    	    		return ss;
+    	    	}
     	    }
     	    return null;
     	    
     	 
      }
-     public boolean addcollaboratorsTOStore(String username,store s,userDatabase udb,storeDatabase sdb) {
+     public boolean addcollaboratorsTOStore(String username,store s,userDatabase udb,storeDatabase sdb,storecontroller scont) {
 		 user u=new user();
 		 u.setUse_name(username);
 		 if(udb.checkExistence(u)) {
+			 s=scont.getStorecont(s.getStoreName(), sdb);
 			 s.addStoreCollaborators(u);
 			 sdb.replaceObject(s);
 			 return true;

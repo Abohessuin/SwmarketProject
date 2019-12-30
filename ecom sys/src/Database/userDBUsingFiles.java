@@ -37,13 +37,15 @@ public class userDBUsingFiles implements userDatabase {
 		user ad1=new user();
 		String userUsername = us.getUse_name();
 		String userPassword = us.getPassword();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter=new databaseIterator(filePath, count);
 			while(baseIter.hasNext()) {
 			       ad1=(user)baseIter.next();
 			       String currUsername = ad1.getUse_name();
 					String currPassword = ad1.getPassword();
 
-					if(currUsername.equals(userUsername) && currPassword.equals(userPassword)) {
+					if(currUsername.equals(userUsername)) {
 						return  ad1;
 					}
 			}
@@ -57,8 +59,8 @@ public class userDBUsingFiles implements userDatabase {
 		user us=(user)ob;
 		user ad1=new user();
 		String userUsername = us.getUse_name();
-		baseIter=new databaseIterator();
-		count=baseIter.setcounter(filePath);
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter=new databaseIterator(filePath, count);
 			while(baseIter.hasNext()){
 			       ad1=(user)baseIter.next();
@@ -160,13 +162,17 @@ public class userDBUsingFiles implements userDatabase {
 	
 	public int getIndexOfObjectInFile(Object ob) {
 		    int i=0;
-	    	count=baseIter.setcounter(filePath);
+		    baseIter = new databaseIterator();
+			count = baseIter.setcounter(filePath);
 		    user a=new user();
+		    user b=(user) ob;
 		    baseIter=new databaseIterator(filePath, count);
 			  while(baseIter.hasNext()) {
 			    a=(user) baseIter.next();
-			    i++;
-			  
+			    if(a.getUse_name().equals(b.getUse_name())){
+			    	return i;
+			    }
+			  i++;
 	    }
 		return i;
 	}
@@ -176,7 +182,8 @@ public class userDBUsingFiles implements userDatabase {
 	public void removeFromDatabase(int index) {
 		 int j=0;
 		   user ss=new user();
-		   count=baseIter.setcounter(filePath);
+		   baseIter = new databaseIterator();
+			count = baseIter.setcounter(filePath);
 		   baseIter=new databaseIterator(filePath,count);
 		   while(baseIter.hasNext()) {
 			   ss=(user)baseIter.next();
@@ -185,7 +192,8 @@ public class userDBUsingFiles implements userDatabase {
 			   }
 			   j++;
 		   }
-		   count=baseIter.setcounter(filePath);
+		   baseIter = new databaseIterator();
+			count = baseIter.setcounter(filePath);
 		   this.clear(filePath);
 		   baseIter=new databaseIterator(tmp, count);
 		   while(baseIter.hasNext()) {
@@ -201,7 +209,8 @@ public class userDBUsingFiles implements userDatabase {
 	public void ModifyObjectInDatabase(int index,Object p) {
 		int j=0;
            user ss=new user();
-		   count=baseIter.setcounter(filePath);
+           baseIter = new databaseIterator();
+   		   count = baseIter.setcounter(filePath);
 		   baseIter=new databaseIterator(filePath,count);
 		   while(baseIter.hasNext()) {
 			   ss=(user)baseIter.next();
@@ -212,7 +221,8 @@ public class userDBUsingFiles implements userDatabase {
 			   }
 			   j++;
 		   }
-		   count=baseIter.setcounter(filePath);
+		   baseIter = new databaseIterator();
+		  count = baseIter.setcounter(filePath);
 		   this.clear(filePath);
 		   baseIter=new databaseIterator(tmp, count);
 		   while(baseIter.hasNext()) {

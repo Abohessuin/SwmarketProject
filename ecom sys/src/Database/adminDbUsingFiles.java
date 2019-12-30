@@ -77,7 +77,7 @@ public class adminDbUsingFiles implements adminDatabase {
 		c.setName("fesalem");
 		FileOutputStream fos;
 		try {
-			fos = new FileOutputStream(filePath);
+			fos = new FileOutputStream(filePath,true);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(a);
 			oos.writeObject(b);
