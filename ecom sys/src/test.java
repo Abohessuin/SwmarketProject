@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 import Database.*;
@@ -123,16 +124,19 @@ public class test {
 					System.out.println("logout press 9");
 					Scanner x = new Scanner(System.in);
 					int u = x.nextInt();
+					currcustomer=controluser.getuser(db, currcustomer);
+					Map<product, store>s=currcustomer.getCart();
+					System.out.println(s.size());
 					switch (u) {
 					case 1: {
 						int nn;
 						System.out.println("create new store press 1");
-						System.out.println("log in current store    press 2");
+						System.out.println("log in current store press 2");
 						x = new Scanner(System.in);
 						nn = x.nextInt();
 						switch (nn) {
 						case 1: {
-							usergui.createNewStore(dbstore, stcontroller, currcustomer.getUse_name());
+							usergui.createNewStore(dbstore, stcontroller, currcustomer.getUse_name(),controluser,db);
 
 						}
 							break;
@@ -149,7 +153,7 @@ public class test {
 							}
 							case 2: {
 								usergui.collaboratorsFunctionalitiesToStoreuser(currcustomer, controluser, dbstore,
-										admincont, dbproduct, stcontroller, smplecont);
+										admincont, dbproduct, stcontroller, smplecont,db);
 							}
 							}
 
@@ -185,7 +189,7 @@ public class test {
 				break;
 			case 3: { // Admin interface
 				Object ob = new Object();
-			//	dbadmin.addToDatabase(ob);
+				dbadmin.addToDatabase(ob);
 				while (true) {
 					check = adminGUI.adminlogin(admincont, dbadmin);
 					if (check == true) {

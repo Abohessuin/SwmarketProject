@@ -30,12 +30,14 @@ public class storeDBUsingFiles implements storeDatabase {
 
 	public storeDBUsingFiles(ArrayList<SearchingBehavior> searchbehave2) {
 		super();
-		this.searchbehave = searchbehave;
+		this.searchbehave = searchbehave2;
 	}
 
 	public store addProductInStore(product pr, String storename) {
 		String n;
 		store ad1 = new store();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
 			ad1 = (store) baseIter.next();
@@ -54,6 +56,8 @@ public class storeDBUsingFiles implements storeDatabase {
 	public store deleteProductFromStore(product pr, String storename) {
 		String n;
 		store ad1 = new store();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
 			ad1 = (store) baseIter.next();
@@ -73,6 +77,8 @@ public class storeDBUsingFiles implements storeDatabase {
 		store ad1 = new store();
 		String storename = us.getStoreName();
 		String storeowner = us.getStoreOwnername();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
 			ad1 = (store) baseIter.next();
@@ -93,6 +99,8 @@ public class storeDBUsingFiles implements storeDatabase {
 		store ad1 = new store();
 		String nam;
 		String storeowner;
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		int count = 1;
 		while (baseIter.hasNext()) {
@@ -127,6 +135,8 @@ public class storeDBUsingFiles implements storeDatabase {
 
 	public Map<product, store> searchForProductDb(String searchproduct) {
 		Map<product, store> mergeAllMatchedProducts = new HashMap<product, store>();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		for (SearchingBehavior curr : searchbehave) {
 			Map<product, store> subarr = curr.searchingAboutMatchingProduct(filePath, searchproduct, count);
 			for (Map.Entry<product, store> entry : subarr.entrySet()) {
@@ -167,6 +177,7 @@ public class storeDBUsingFiles implements storeDatabase {
 
 	public int getIndexOfObjectInFile(Object ob) {
 		int i = 0;
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		store a = new store();
 		baseIter = new databaseIterator(filePath, count);
@@ -179,8 +190,9 @@ public class storeDBUsingFiles implements storeDatabase {
 	}
 
 	public void removeFromDatabase(int index) {
-		int j = 0;
+		int j = 1;
 		store ss = new store();
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
@@ -190,6 +202,7 @@ public class storeDBUsingFiles implements storeDatabase {
 			}
 			j++;
 		}
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		this.clear(filePath);
 		baseIter = new databaseIterator(tmp, count);
@@ -203,8 +216,9 @@ public class storeDBUsingFiles implements storeDatabase {
 	}
 
 	public void ModifyObjectInDatabase(int index, Object p) {
-		int j = 0;
+		int j = 1;
 		store ss = new store();
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
@@ -216,6 +230,7 @@ public class storeDBUsingFiles implements storeDatabase {
 			}
 			j++;
 		}
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		this.clear(filePath);
 		baseIter = new databaseIterator(tmp, count);
@@ -236,6 +251,8 @@ public class storeDBUsingFiles implements storeDatabase {
 
 	public store getStore(String storename) {
 		store ad1 = new store();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
 			ad1 = (store) baseIter.next();
@@ -250,6 +267,8 @@ public class storeDBUsingFiles implements storeDatabase {
 
 	public product getProductFromStore(String productname) {
 		store ad1 = new store();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
 			ad1 = (store) baseIter.next();

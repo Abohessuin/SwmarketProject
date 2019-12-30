@@ -30,9 +30,9 @@ public class storecontroller {
 		}
 		sdb.replaceObject(s);
 	}
-	
+
 	public void DeleteOFFerToStore(storeDatabase sdb, store s, double setVal) {
-		double ss=s.getStoreOffer();
+		double ss = s.getStoreOffer();
 		s.setStoreOffer(setVal);
 		if (s.isActiveOnStore()) {
 			storeHistory h = new storeHistory("delete", "offer");
@@ -111,6 +111,10 @@ public class storecontroller {
 
 	public Map<product, store> searchforproductbycont(String productsearch, storeDatabase db) {
 		return db.searchForProductDb(productsearch);
+	}
+
+	public store getStorecont(String stn, storeDatabase sdb) {
+		return sdb.getStore(stn);
 	}
 
 }

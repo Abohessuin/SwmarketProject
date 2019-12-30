@@ -22,7 +22,7 @@ public class Controller {
 	}
 	 
 	 public boolean checkValidtyOfProductQuantity(product p,int Productquant) {
-		                if(p.getQuantity()<=Productquant) {
+		                if(p.getQuantity()>=Productquant) {
 		                	return true;
 		                }
 		                return false;
@@ -43,11 +43,12 @@ public class Controller {
 					for (Entry<product, store> entry : p.entrySet()) {
 						m=entry.getKey();
 						pop=m.getPrice();
-						price+=pop;
+						price+=pop*pb.get(i).currencyValue();
+						break;
 					}
 					
 				}
-				break;
+				
 			}
 			return price;
 		}

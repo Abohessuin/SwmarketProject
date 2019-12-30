@@ -38,6 +38,8 @@ public class productDbUsingFiles implements productDatabase {
 		product ad1 = new product();
 		String category = us.getType();
 		String brandname = us.getBrandname();
+		baseIter = new databaseIterator();
+		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
 			ad1 = (product) baseIter.next();
@@ -119,7 +121,9 @@ public class productDbUsingFiles implements productDatabase {
 
 	public int getIndexOfObjectInFile(Object ob) {
 		int i = 0;
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
+
 		product a = new product();
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
@@ -131,8 +135,9 @@ public class productDbUsingFiles implements productDatabase {
 	}
 
 	public void removeFromDatabase(int index) {
-		int j = 0;
+		int j = 1;
 		product ss = new product();
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
@@ -155,8 +160,9 @@ public class productDbUsingFiles implements productDatabase {
 	}
 
 	public void ModifyObjectInDatabase(int index, Object p) {
-		int j = 0;
+		int j = 1;
 		product ss = new product();
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		baseIter = new databaseIterator(filePath, count);
 		while (baseIter.hasNext()) {
@@ -168,6 +174,7 @@ public class productDbUsingFiles implements productDatabase {
 			}
 			j++;
 		}
+		baseIter = new databaseIterator();
 		count = baseIter.setcounter(filePath);
 		this.clear(filePath);
 		baseIter = new databaseIterator(tmp, count);

@@ -18,6 +18,8 @@ public class user implements Serializable{
 		this.password = password;
 
 	}
+	
+	
 
 
 
@@ -35,7 +37,9 @@ public class user implements Serializable{
 		return Cart;
 	}
 
-
+	public void addToStore(store s) {
+		storesUserowened.add(s);
+	}
 
 
 	public void setCart(Map<product, store> cart) {
